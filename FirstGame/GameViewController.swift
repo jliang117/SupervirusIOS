@@ -8,33 +8,57 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
-
+    
+    static let gameSceneViewFactor = CGFloat(1)
+    
+    lazy var skView: SKView = {
+        let view = SKView()
+        
+        view.isMultipleTouchEnabled = true
+        view.frame = CGRect(x: 0.0, y: 0.0, width: ScreenSize.width , height: ScreenSize.height  )
+//        view.center = CGPoint.zero
+        return view
+    }()
+    
+    
+    
     override func viewDidLoad() {
-        let scene = GameScene(size: view.bounds.size)
-        let skView = view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.ignoresSiblingOrder = true
-        scene.scaleMode = .resizeFill
-        skView.presentScene(scene)
+        super.viewDidLoad()
+        setupView()
+        
     }
-
-    override var shouldAutorotate: Bool {
-        return true
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return .allButUpsideDown
-        } else {
-            return .all
-        }
+        return .portrait
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    fileprivate func setupView(){
+        view.addSubview(skView)
+    
+        let scene = setupScene()
+        
+        skView.presentScene(scene)
+        skView.ignoresSiblingOrder = true
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.ignoresSiblingOrder = true
+    }
+    
+    fileprivate func setupScene() -> SKScene{
+        let scene = GameScene(size: CGSize(width: ScreenSize.width * GameViewController.gameSceneViewFactor, height: ScreenSize.height * GameViewController.gameSceneViewFactor))
+        scene.scaleMode = .aspectFit
+        return scene
+    }
+    
 }
