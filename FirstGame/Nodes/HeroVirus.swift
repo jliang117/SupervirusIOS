@@ -16,16 +16,20 @@ class HeroVirus : Virus
         return virusImage
     }()
     
-    lazy private var radius: CGFloat = {
-        let startSize = virusImage.size()
-        return startSize.width/2
-    }()
+//    lazy private var radius: CGFloat = {
+//        let startSize = virusImage.size()
+//        return startSize.width/2
+//    }()
+    
+    var radius:CGFloat
     
     required init?(coder aDecoder: NSCoder) {
+        radius = 0
         super.init(coder: aDecoder)
     }
     
     override init(radius: CGFloat, startPos: CGPoint, imageNamed: String) {
+        self.radius = radius
         super.init(radius: radius, startPos: startPos, imageNamed: imageNamed)
         
         let path = CGMutablePath()

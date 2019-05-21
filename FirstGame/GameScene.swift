@@ -70,7 +70,7 @@ class GameScene: SKScene {
         setupNodes()
         setupCamera()
         setupJoystick()
-        createMonsters()
+        createMonsters(numCreated:10)
         createLabels()
 //        drawPlayableArea()
     }
@@ -121,7 +121,7 @@ class GameScene: SKScene {
     }
     
     private func updateScoreLabel(){
-        scoreLabel.text = "Score \(player.getScore())"
+        scoreLabel.text = "Score \(player.getScore() - 20)"
     }
     
     private func setupNodes(){
@@ -138,9 +138,9 @@ class GameScene: SKScene {
         }
     }
     
-    private func createMonsters(){
-        for _ in 1...19{
-            let randRadi = randomBetween(lower: 3, upper: Double(2 * heroStartSize))
+    private func createMonsters(numCreated:Int){
+        for _ in 1...numCreated{
+            let randRadi = randomBetween(lower: 5, upper: Double(2 * heroStartSize))
             let startPos = createRandomStartPosition(accountingForRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
