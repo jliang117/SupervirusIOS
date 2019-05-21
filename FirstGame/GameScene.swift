@@ -13,8 +13,8 @@ class GameScene: SKScene {
     
     let cam = SKCameraNode()
     let velocityMultiplier: CGFloat = 0.12
-    let bgSize = 600
-    let heroStartSize = 20
+    let bgSize: Int = 600
+    let heroStartSize: Int = 20
     
     enum NodesZPosition: CGFloat {
         case background, hero, joystick
@@ -112,7 +112,7 @@ class GameScene: SKScene {
     
     private func createMonsters(){
         for _ in 1...19{
-            let randRadi = randomNum(lower: 3, upper: 2 * heroStartSize)
+            let randRadi = randomBetween(lower: 3, upper: Double(2 * heroStartSize))
             let startPos = createRandomStartPosition(accountingForRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
@@ -120,16 +120,28 @@ class GameScene: SKScene {
     }
     
     private func createRandomStartPosition(accountingForRadius radius:Int)->CGPoint{
-        let minPoint:Double = Double(randomNum(lower: 50, upper: 200))
-        let pointSeed = arc4random_uniform(UInt32(bgSize))
-        let pointX = addAbsoluteValue(numToAdd: Int(minPoint), addee: randomNum(lower: -(Int(pointSeed+1)) , upper: Int(pointSeed)))
-        let pointY = addAbsoluteValue(numToAdd: Int(minPoint), addee: randomNum(lower: -(Int(pointSeed+1)) , upper: Int(pointSeed)))
+        let pointSeed = arc4random_uniform(UInt32(bgSize-radius-100))
+        
+        let minPoint:Int = randomBetween(lower: 30, upper: 300)
+        let minDistanceThreshold: Int = 100
+        
+        var pointX: Int = randomBetween(lower: -(Double(pointSeed+1)) , upper: Double(pointSeed))
+        var pointY: Int = randomBetween(lower: -(Double(pointSeed+1)) , upper: Double(pointSeed))
+        
+        if pointX < minDistanceThreshold {
+            pointX = addAbsoluteValue(numToAdd: minPoint, addee: pointX)
+        }
+        if pointY < minDistanceThreshold{
+            pointY = addAbsoluteValue(numToAdd: minPoint, addee: pointY)
+        }
+        
         print("seed: \(pointSeed) radius: \(radius), point: \(CGPoint(x: pointX, y: pointY))")
         return CGPoint(x: pointX, y: pointY)
     }
     
-    private func randomNum(lower:Int, upper:Int)->Int{
-        return Int(arc4random_uniform(UInt32(upper - lower))) + lower
+    private func randomBetween(lower:Double, upper:Double)->Int{
+        return Int(Double.random(in: lower...upper))
+//        return Int(arc4random_uniform(UInt32(upper - lower))) + lower
     }
     
     private func addAbsoluteValue(numToAdd:Int, addee:Int) -> Int{
