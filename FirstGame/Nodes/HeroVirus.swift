@@ -38,4 +38,7 @@ class HeroVirus : Virus
         //        physicsBody?.angularVelocity = 0
     }
     
+    func getScore()->Int{
+        return Int(radius)
+    }
 }

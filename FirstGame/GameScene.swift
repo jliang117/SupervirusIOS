@@ -12,6 +12,10 @@ import SpriteKit
 class GameScene: SKScene {
     
     let cam = SKCameraNode()
+    
+    var scoreLabel = SKLabelNode()
+    var positionLabel = SKLabelNode()
+    
     let velocityMultiplier: CGFloat = 0.12
     let bgSize: Int = 600
     let heroStartSize: Int = 20
@@ -67,12 +71,15 @@ class GameScene: SKScene {
         setupCamera()
         setupJoystick()
         createMonsters()
+        createLabels()
 //        drawPlayableArea()
     }
     
     
     override func update(_ currentTime: TimeInterval) {
         cam.position = player.position
+        updatePositionLabel()
+        updateScoreLabel()
     }
     
     private func drawPlayableArea(){
@@ -91,6 +98,30 @@ class GameScene: SKScene {
         camera = cam
         addChild(cam)
         cam.addChild(analogJoystick)
+        cam.addChild(positionLabel)
+        cam.addChild(scoreLabel)
+    }
+    
+    private func createLabels(){
+        positionLabel.position = CGPoint(x: frame.midX, y: frame.midY + 200)
+        positionLabel.fontColor = .red
+        positionLabel.fontName = "Chalkduster"
+        positionLabel.fontSize = 32
+        
+        scoreLabel.position = CGPoint(x: -(frame.size.width * 0.30), y: -(frame.size.height * 0.40))
+        scoreLabel.fontColor = .black
+        scoreLabel.fontName = "Chalkduster"
+        scoreLabel.fontSize = 20
+    }
+    
+    private func updatePositionLabel(){
+        let posX: Int = Int(player.position.x)
+        let posY: Int = Int(player.position.y)
+        positionLabel.text = "x \(posX), y \(posY)"
+    }
+    
+    private func updateScoreLabel(){
+        scoreLabel.text = "Score \(player.getScore())"
     }
     
     private func setupNodes(){
