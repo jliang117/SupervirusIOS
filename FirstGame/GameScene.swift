@@ -30,16 +30,17 @@ class GameScene: SKScene {
         
         let sprite = SKShapeNode(path: path, centered: true)
         sprite.strokeColor = .black
-        sprite.lineWidth = 4
+        sprite.lineWidth = 6
         sprite.fillColor = .clear
         
-        let bgPhys = SKPhysicsBody(edgeChainFrom: path)
+        let bgPhys = SKPhysicsBody(edgeLoopFrom: path)
         bgPhys.restitution = 0
 //        bgPhys.allowsRotation = false
         bgPhys.isResting = true
         bgPhys.friction = 0
         bgPhys.affectedByGravity = false
         bgPhys.angularVelocity = 0
+        
         
         sprite.physicsBody = bgPhys
         sprite.physicsBody?.categoryBitMask =  CategoryBitmask.screenBounds.rawValue
