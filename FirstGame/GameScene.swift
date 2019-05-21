@@ -14,6 +14,7 @@ class GameScene: SKScene {
     let cam = SKCameraNode()
     let velocityMultiplier: CGFloat = 0.12
     let bgSize = 600
+    let heroStartSize = 20
     
     enum NodesZPosition: CGFloat {
         case background, hero, joystick
@@ -35,22 +36,17 @@ class GameScene: SKScene {
         
         let bgPhys = SKPhysicsBody(edgeLoopFrom: path)
         bgPhys.restitution = 0
-//        bgPhys.allowsRotation = false
         bgPhys.isResting = true
         bgPhys.friction = 0
         bgPhys.affectedByGravity = false
-        bgPhys.angularVelocity = 0
-        
         
         sprite.physicsBody = bgPhys
         sprite.physicsBody?.categoryBitMask =  CategoryBitmask.screenBounds.rawValue
-//        sprite.zPosition = NodesZPosition.hero.rawValue
         return sprite
     }()
     
     lazy var player: HeroVirus = {
-        var hero = HeroVirus.init(radius: 20, startPos: CGPoint.zero, imageNamed: "heroVirus")
-//        hero.zPosition = NodesZPosition.hero.rawValue
+        var hero = HeroVirus.init(radius: CGFloat(heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus")
         hero.physicsBody?.collisionBitMask = CategoryBitmask.screenBounds.rawValue
         hero.name = "player"
         return hero
@@ -70,6 +66,7 @@ class GameScene: SKScene {
         setupNodes()
         setupCamera()
         setupJoystick()
+        createMonsters()
 //        drawPlayableArea()
     }
     
@@ -111,5 +108,37 @@ class GameScene: SKScene {
             self.player.position = CGPoint(x: self.player.position.x + (data.velocity.x * self.velocityMultiplier),
                                          y: self.player.position.y + (data.velocity.y * self.velocityMultiplier))
         }
+    }
+    
+    private func createMonsters(){
+        for _ in 1...19{
+            let randRadi = randomNum(lower: 3, upper: 2 * heroStartSize)
+            let startPos = createRandomStartPosition(accountingForRadius: randRadi)
+            let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
+            addChild(monster)
+        }
+    }
+    
+    private func createRandomStartPosition(accountingForRadius radius:Int)->CGPoint{
+        let minPoint:Double = Double(randomNum(lower: 50, upper: 200))
+        let pointSeed = arc4random_uniform(UInt32(bgSize))
+        let pointX = addAbsoluteValue(numToAdd: Int(minPoint), addee: randomNum(lower: -(Int(pointSeed+1)) , upper: Int(pointSeed)))
+        let pointY = addAbsoluteValue(numToAdd: Int(minPoint), addee: randomNum(lower: -(Int(pointSeed+1)) , upper: Int(pointSeed)))
+        print("seed: \(pointSeed) radius: \(radius), point: \(CGPoint(x: pointX, y: pointY))")
+        return CGPoint(x: pointX, y: pointY)
+    }
+    
+    private func randomNum(lower:Int, upper:Int)->Int{
+        return Int(arc4random_uniform(UInt32(upper - lower))) + lower
+    }
+    
+    private func addAbsoluteValue(numToAdd:Int, addee:Int) -> Int{
+//        print("adding \(numToAdd) to \(addee)")
+        if addee < 0 {
+            let retVal = addee - numToAdd
+//            print("negative addee, reval is: \(retVal)")
+            return retVal
+        }
+        return numToAdd + addee
     }
 }

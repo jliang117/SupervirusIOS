@@ -32,6 +32,7 @@ class MonsterVirus : Virus
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.allowsRotation = false
         physics.affectedByGravity = false
+        physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue
         physicsBody = physics
     }
     
