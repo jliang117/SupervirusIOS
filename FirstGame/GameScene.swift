@@ -70,9 +70,6 @@ class GameScene: SKScene {
 //        drawPlayableArea()
     }
     
-    override func didSimulatePhysics() {
-        
-    }
     
     override func update(_ currentTime: TimeInterval) {
         cam.position = player.position
@@ -135,7 +132,7 @@ class GameScene: SKScene {
             pointY = addAbsoluteValue(numToAdd: minPoint, addee: pointY)
         }
         
-        print("seed: \(pointSeed) radius: \(radius), point: \(CGPoint(x: pointX, y: pointY))")
+//        print("seed: \(pointSeed) radius: \(radius), point: \(CGPoint(x: pointX, y: pointY))")
         return CGPoint(x: pointX, y: pointY)
     }
     
