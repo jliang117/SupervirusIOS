@@ -87,8 +87,7 @@ class GameScene: SKScene {
         area.lineWidth = 2
         area.strokeColor = .red
         area.position = CGPoint.zero
-        
-//        addChild(area)
+        addChild(area)
         
     }
     
@@ -167,7 +166,6 @@ class GameScene: SKScene {
     
     private func randomBetween(lower:Double, upper:Double)->Int{
         return Int(Double.random(in: lower...upper))
-//        return Int(arc4random_uniform(UInt32(upper - lower))) + lower
     }
     
     private func addAbsoluteValue(numToAdd:Int, addee:Int) -> Int{
