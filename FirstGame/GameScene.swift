@@ -62,23 +62,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }()
 
     
-    //Mark: Main init
-    
+    //    Mark: main init
     override func didMove(to view: SKView) {
         setupNodes()
         setupCamera()
         setupJoystick()
+        setupPhysics()
         createMonsters(numCreated:10)
         createLabels()
+        
 //        drawPlayableArea()
     }
     
-    
+    //    Mark: continuous game logic
     override func update(_ currentTime: TimeInterval) {
         cam.position = player.position
         updatePositionLabel()
         updateScoreLabel()
     }
+    
+    //    Mark: virus collison logic
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let aNode = contact.bodyA.node else {return}
+        guard let bNode = contact.bodyB.node else {return}
+        
+        if aNode.name == "player"{
+            collisionBetween(hero: aNode, monster: bNode)
+        }
+        else{
+            collisionBetween(hero: bNode, monster: aNode)
+        }
+    }
+    
+    
     
     private func drawPlayableArea(){
         let path = CGMutablePath()
@@ -89,6 +105,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         area.position = CGPoint.zero
         addChild(area)
         
+    }
+    
+    private func setupPhysics(){
+        physicsWorld.contactDelegate = self
+        
+    }
+    
+    private func collisionBetween(hero: SKNode, monster: SKNode){
+    }
+    
+    private func destroy(virus:SKNode){
+        virus.removeFromParent()
     }
     
     private func setupCamera(){
