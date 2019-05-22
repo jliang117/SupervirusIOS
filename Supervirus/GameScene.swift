@@ -65,23 +65,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPhysics()
         createMonsters(numCreated:10)
         createLabels()
-        
-//        drawPlayableArea()
     }
     
     //    Mark: continuous game logic
     override func update(_ currentTime: TimeInterval) {
         cam.position = player.position
-        updatePositionLabel()
         updateScoreLabel()
     }
     
     //    Mark: virus collison logic
     func didBegin(_ contact: SKPhysicsContact) {
-        guard let aNode:Virus = contact.bodyA.node as? Virus else{
+        guard let aNode: Virus = contact.bodyA.node as? Virus else{
             return
         }
-        guard let bNode = contact.bodyB.node as? Virus else {
+        guard let bNode: Virus = contact.bodyB.node as? Virus else {
             return
         }
         
@@ -94,8 +91,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-
-    
     private func setupPhysics(){
         physicsWorld.contactDelegate = self
         
@@ -105,7 +100,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if hero.radius >= monster.radius{
             print("hero \(hero.radius) collided with monster \(monster.radius)")
             eatMonsterAndRecreateHero(hero: hero, monster: monster)
-           
+        }
+        else{
+            
         }
     }
     
@@ -114,7 +111,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         hero.score = hero.score + monster.score
         destroy(virus: monster)
         destroy(virus: hero)
-        
         addNewHero(withRadius: hero.radius, atPoint: hero.position, score: hero.score)
     }
     
@@ -176,13 +172,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func createMonsters(numCreated:Int){
         for _ in 1...numCreated{
             let randRadi = randomBetween(lower: 5, upper: Double(2 * player.radius))
-            let startPos = createRandomStartPosition(withRadius: randRadi)
+            let startPos = createRandomStartPosition(withBackgroundRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
         }
     }
     
-    private func createRandomStartPosition(withRadius radius:Int)->CGPoint{
+    private func createRandomStartPosition(withBackgroundRadius radius:Int)->CGPoint{
         let pointSeed = arc4random_uniform(UInt32(bgSize-radius-100))
         
         let minPoint:Int = randomBetween(lower: 30, upper: 300)

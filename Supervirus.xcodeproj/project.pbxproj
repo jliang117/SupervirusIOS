@@ -43,15 +43,15 @@
 		664F655D2294940D006F5E1B /* HeroVirus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroVirus.swift; sourceTree = "<group>"; };
 		664F655F22949440006F5E1B /* CategoryBitmask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryBitmask.swift; sourceTree = "<group>"; };
 		664F656322949564006F5E1B /* MonsterVirus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterVirus.swift; sourceTree = "<group>"; };
-		66A81F34228B5152005490CA /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A81F34228B5152005490CA /* Supervirus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Supervirus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A81F37228B5152005490CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66A81F3D228B5152005490CA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		66A81F3F228B5152005490CA /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		66A81F44228B5153005490CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66A81F47228B5153005490CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66A81F49228B5153005490CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66A81F4E228B5153005490CA /* FirstGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		66A81F59228B5154005490CA /* FirstGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A81F4E228B5153005490CA /* SupervirusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SupervirusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66A81F59228B5154005490CA /* SupervirusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SupervirusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A81F6D228B8E96005490CA /* Virus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Virus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +93,7 @@
 		66A81F2B228B5152005490CA = {
 			isa = PBXGroup;
 			children = (
-				66A81F36228B5152005490CA /* FirstGame */,
+				66A81F36228B5152005490CA /* Supervirus */,
 				66A81F35228B5152005490CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,14 +101,14 @@
 		66A81F35228B5152005490CA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				66A81F34228B5152005490CA /* FirstGame.app */,
-				66A81F4E228B5153005490CA /* FirstGameTests.xctest */,
-				66A81F59228B5154005490CA /* FirstGameUITests.xctest */,
+				66A81F34228B5152005490CA /* Supervirus.app */,
+				66A81F4E228B5153005490CA /* SupervirusTests.xctest */,
+				66A81F59228B5154005490CA /* SupervirusUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		66A81F36228B5152005490CA /* FirstGame */ = {
+		66A81F36228B5152005490CA /* Supervirus */ = {
 			isa = PBXGroup;
 			children = (
 				66A81F37228B5152005490CA /* AppDelegate.swift */,
@@ -122,15 +122,15 @@
 				664F655722924E21006F5E1B /* Extensions.swift */,
 				664F655922924FF4006F5E1B /* AnalogJoystick.swift */,
 			);
-			path = FirstGame;
+			path = Supervirus;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		66A81F33228B5152005490CA /* FirstGame */ = {
+		66A81F33228B5152005490CA /* Supervirus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 66A81F62228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGame" */;
+			buildConfigurationList = 66A81F62228B5154005490CA /* Build configuration list for PBXNativeTarget "Supervirus" */;
 			buildPhases = (
 				66A81F30228B5152005490CA /* Sources */,
 				66A81F31228B5152005490CA /* Frameworks */,
@@ -140,14 +140,14 @@
 			);
 			dependencies = (
 			);
-			name = FirstGame;
+			name = Supervirus;
 			productName = FirstGame;
-			productReference = 66A81F34228B5152005490CA /* FirstGame.app */;
+			productReference = 66A81F34228B5152005490CA /* Supervirus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		66A81F4D228B5153005490CA /* FirstGameTests */ = {
+		66A81F4D228B5153005490CA /* SupervirusTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 66A81F65228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGameTests" */;
+			buildConfigurationList = 66A81F65228B5154005490CA /* Build configuration list for PBXNativeTarget "SupervirusTests" */;
 			buildPhases = (
 				66A81F4A228B5153005490CA /* Sources */,
 				66A81F4B228B5153005490CA /* Frameworks */,
@@ -158,14 +158,14 @@
 			dependencies = (
 				66A81F50228B5153005490CA /* PBXTargetDependency */,
 			);
-			name = FirstGameTests;
+			name = SupervirusTests;
 			productName = FirstGameTests;
-			productReference = 66A81F4E228B5153005490CA /* FirstGameTests.xctest */;
+			productReference = 66A81F4E228B5153005490CA /* SupervirusTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		66A81F58228B5154005490CA /* FirstGameUITests */ = {
+		66A81F58228B5154005490CA /* SupervirusUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 66A81F68228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGameUITests" */;
+			buildConfigurationList = 66A81F68228B5154005490CA /* Build configuration list for PBXNativeTarget "SupervirusUITests" */;
 			buildPhases = (
 				66A81F55228B5154005490CA /* Sources */,
 				66A81F56228B5154005490CA /* Frameworks */,
@@ -176,9 +176,9 @@
 			dependencies = (
 				66A81F5B228B5154005490CA /* PBXTargetDependency */,
 			);
-			name = FirstGameUITests;
+			name = SupervirusUITests;
 			productName = FirstGameUITests;
-			productReference = 66A81F59228B5154005490CA /* FirstGameUITests.xctest */;
+			productReference = 66A81F59228B5154005490CA /* SupervirusUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -204,7 +204,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 66A81F2F228B5152005490CA /* Build configuration list for PBXProject "FirstGame" */;
+			buildConfigurationList = 66A81F2F228B5152005490CA /* Build configuration list for PBXProject "Supervirus" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -217,9 +217,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				66A81F33228B5152005490CA /* FirstGame */,
-				66A81F4D228B5153005490CA /* FirstGameTests */,
-				66A81F58228B5154005490CA /* FirstGameUITests */,
+				66A81F33228B5152005490CA /* Supervirus */,
+				66A81F4D228B5153005490CA /* SupervirusTests */,
+				66A81F58228B5154005490CA /* SupervirusUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -286,12 +286,12 @@
 /* Begin PBXTargetDependency section */
 		66A81F50228B5153005490CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 66A81F33228B5152005490CA /* FirstGame */;
+			target = 66A81F33228B5152005490CA /* Supervirus */;
 			targetProxy = 66A81F4F228B5153005490CA /* PBXContainerItemProxy */;
 		};
 		66A81F5B228B5154005490CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 66A81F33228B5152005490CA /* FirstGame */;
+			target = 66A81F33228B5152005490CA /* Supervirus */;
 			targetProxy = 66A81F5A228B5154005490CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,12 +430,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4L7H73S47;
-				INFOPLIST_FILE = FirstGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supervirus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = liangji117.games.FirstGame;
+				PRODUCT_BUNDLE_IDENTIFIER = liangji117.games.Supervirus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,12 +448,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L4L7H73S47;
-				INFOPLIST_FILE = FirstGame/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supervirus/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = liangji117.games.FirstGame;
+				PRODUCT_BUNDLE_IDENTIFIER = liangji117.games.Supervirus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,7 +477,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Supervirus.app/Supervirus";
 			};
 			name = Debug;
 		};
@@ -498,7 +498,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Supervirus.app/Supervirus";
 			};
 			name = Release;
 		};
@@ -545,7 +545,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		66A81F2F228B5152005490CA /* Build configuration list for PBXProject "FirstGame" */ = {
+		66A81F2F228B5152005490CA /* Build configuration list for PBXProject "Supervirus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				66A81F60228B5154005490CA /* Debug */,
@@ -554,7 +554,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		66A81F62228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGame" */ = {
+		66A81F62228B5154005490CA /* Build configuration list for PBXNativeTarget "Supervirus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				66A81F63228B5154005490CA /* Debug */,
@@ -563,7 +563,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		66A81F65228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGameTests" */ = {
+		66A81F65228B5154005490CA /* Build configuration list for PBXNativeTarget "SupervirusTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				66A81F66228B5154005490CA /* Debug */,
@@ -572,7 +572,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		66A81F68228B5154005490CA /* Build configuration list for PBXNativeTarget "FirstGameUITests" */ = {
+		66A81F68228B5154005490CA /* Build configuration list for PBXNativeTarget "SupervirusUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				66A81F69228B5154005490CA /* Debug */,
