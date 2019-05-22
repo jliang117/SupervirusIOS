@@ -30,6 +30,7 @@ class MonsterVirus : Virus
         let path = CGMutablePath()
         path.addArc(center: CGPoint.zero, radius: radius, startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
         let physics = SKPhysicsBody(circleOfRadius: radius)
+        physics.isDynamic = false
         physics.allowsRotation = false
         physics.affectedByGravity = false
         physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue
