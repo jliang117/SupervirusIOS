@@ -10,16 +10,6 @@ import SpriteKit
 
 class MonsterVirus : Virus
 {
-    lazy private var virusImage: SKTexture = {
-        let virusImage: SKTexture = SKTexture.init(imageNamed: "heroVirus")
-        return virusImage
-    }()
-    
-    lazy private var radius: CGFloat = {
-        let startSize = virusImage.size()
-        return startSize.width/2
-    }()
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
