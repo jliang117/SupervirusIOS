@@ -102,8 +102,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             eatMonsterAndRecreateHero(hero: hero, monster: monster)
         }
         else{
-            
+            gameOver()
         }
+    }
+    
+    private func gameOver(){
+        stopJoystickTracking()
+        run(SKAction.sequence([
+            SKAction.run {
+                let reveal = SKTransition.crossFade(withDuration: 0.5)
+                let scene = LoseScene(size: self.size, score: self.player.score)
+                self.view?.presentScene(scene, transition:reveal)
+            }
+            ]))
     }
     
     private func eatMonsterAndRecreateHero(hero: HeroVirus, monster: Virus){
@@ -167,6 +178,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.player.position = CGPoint(x: self.player.position.x + (data.velocity.x * self.velocityMultiplier),
                                          y: self.player.position.y + (data.velocity.y * self.velocityMultiplier))
         }
+    }
+    
+    private func stopJoystickTracking(){
+        analogJoystick.trackingHandler = nil
     }
     
     private func createMonsters(numCreated:Int){

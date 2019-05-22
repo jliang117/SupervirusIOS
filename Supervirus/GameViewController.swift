@@ -18,7 +18,6 @@ class GameViewController: UIViewController {
         
         view.isMultipleTouchEnabled = true
         view.frame = CGRect(x: 0.0, y: 0.0, width: ScreenSize.width , height: ScreenSize.height  )
-//        view.center = CGPoint.zero
         return view
     }()
     
