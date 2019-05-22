@@ -140,14 +140,14 @@ class GameScene: SKScene {
     
     private func createMonsters(numCreated:Int){
         for _ in 1...numCreated{
-            let randRadi = randomBetween(lower: 5, upper: Double(2 * heroStartSize))
-            let startPos = createRandomStartPosition(accountingForRadius: randRadi)
+            let randRadi = randomBetween(lower: 5, upper: Double(2 * player.radius))
+            let startPos = createRandomStartPosition(withRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
         }
     }
     
-    private func createRandomStartPosition(accountingForRadius radius:Int)->CGPoint{
+    private func createRandomStartPosition(withRadius radius:Int)->CGPoint{
         let pointSeed = arc4random_uniform(UInt32(bgSize-radius-100))
         
         let minPoint:Int = randomBetween(lower: 30, upper: 300)
