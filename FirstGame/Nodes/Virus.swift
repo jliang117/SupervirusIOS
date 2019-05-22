@@ -10,24 +10,25 @@ import SpriteKit
 
 class Virus : SKSpriteNode
 {
-    var radius:CGFloat
+    var radius: CGFloat
+    var score: Int
     
     required init?(coder aDecoder: NSCoder) {
         radius = 0
+        score = 0
         super.init(coder: aDecoder)
     }
     
     
     init(radius: CGFloat, startPos: CGPoint, imageNamed: String){
         self.radius = radius
+        self.score = Int(radius)
         super.init(texture: SKTexture.init(imageNamed: imageNamed), color: .red, size: CGSize(width: radius * 2, height: radius * 2))
-        //        let virusCircle = CGMutablePath()
-        //        virusCircle.addArc(center: startPos, radius: radius, startAngle: 0, endAngle: 2 * CGFloat(Double.pi * 2), clockwise: true)
         position = startPos
     }
     
     func getScore()->Int{
-        return Int(radius)
+        return score
     }
 }
 

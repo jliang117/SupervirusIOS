@@ -16,11 +16,9 @@ class HeroVirus : Virus
         super.init(coder: aDecoder)
     }
     
-    override init(radius: CGFloat, startPos: CGPoint, imageNamed: String) {
+    init(radius: CGFloat, startPos: CGPoint, imageNamed: String, score: Int) {
         super.init(radius: radius, startPos: startPos, imageNamed: imageNamed)
-        
-        let path = CGMutablePath()
-        path.addArc(center: CGPoint.zero, radius: radius, startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
+        self.score = score
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.usesPreciseCollisionDetection = true
         physics.collisionBitMask = CategoryBitmask.screenBounds.rawValue | CategoryBitmask.enemyVirus.rawValue

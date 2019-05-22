@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }()
     
     lazy var player: HeroVirus = {
-        var hero = HeroVirus.init(radius: CGFloat(heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus")
+        var hero = HeroVirus.init(radius: CGFloat(heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus",score: 0)
         return hero
     }()
     
@@ -83,14 +83,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //    Mark: virus collison logic
     func didBegin(_ contact: SKPhysicsContact) {
-        guard let aNode = contact.bodyA.node else {return}
-        guard let bNode = contact.bodyB.node else {return}
+        guard let aNode:Virus = contact.bodyA.node as? Virus else{
+            return
+        }
+        guard let bNode = contact.bodyB.node as? Virus else {
+            return
+        }
         
         if aNode.name == "player"{
-            collisionBetween(hero: aNode, monster: bNode)
+            collisionBetween(hero: aNode as! HeroVirus, monster: bNode)
         }
         else{
-            collisionBetween(hero: bNode, monster: aNode)
+            collisionBetween(hero: bNode as! HeroVirus, monster: aNode)
         }
     }
     
@@ -112,8 +116,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    private func collisionBetween(hero: SKNode, monster: SKNode){
+    private func collisionBetween(hero: HeroVirus, monster: Virus){
+        if hero.radius >= monster.radius{
+            print("hero \(hero.radius) collided with monster \(monster.radius)")
+            eatMonsterAndRecreateHero(hero: hero, monster: monster)
+           
+        }
     }
+    
+    private func eatMonsterAndRecreateHero(hero: HeroVirus, monster: Virus){
+        hero.radius = hero.radius * 1.05
+        hero.score = hero.score + monster.score
+        destroy(virus: monster)
+        destroy(virus: hero)
+        
+        addNewHero(withRadius: hero.radius, atPoint: hero.position, score: hero.score)
+    }
+    
+    private func addNewHero(withRadius radius: CGFloat, atPoint point:CGPoint, score: Int){
+        let newHero :HeroVirus = HeroVirus(radius: radius, startPos: point, imageNamed: "heroVirus", score: score)
+        player = newHero
+        addChild(newHero)
+    }
+    
     
     private func destroy(virus:SKNode){
         virus.removeFromParent()
@@ -146,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func updateScoreLabel(){
-        scoreLabel.text = "Score \(player.getScore() - 20)"
+        scoreLabel.text = "Score \(player.getScore())"
     }
     
     private func setupNodes(){

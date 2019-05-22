@@ -16,9 +16,7 @@ class MonsterVirus : Virus
     
     override init(radius: CGFloat, startPos: CGPoint, imageNamed: String) {
         super.init(radius: radius, startPos: startPos, imageNamed: imageNamed)
-        
-        let path = CGMutablePath()
-        path.addArc(center: CGPoint.zero, radius: radius, startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
+
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.isDynamic = false
         physics.allowsRotation = false
