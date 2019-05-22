@@ -36,7 +36,8 @@ class HeroVirus : Virus
         path.addArc(center: CGPoint.zero, radius: radius, startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.usesPreciseCollisionDetection = true
-        physics.collisionBitMask = CategoryBitmask.screenBounds.rawValue
+        physics.collisionBitMask = CategoryBitmask.screenBounds.rawValue | CategoryBitmask.enemyVirus.rawValue
+        physics.contactTestBitMask = CategoryBitmask.enemyVirus.rawValue
         physics.allowsRotation = false
         physics.affectedByGravity = false
         physicsBody = physics

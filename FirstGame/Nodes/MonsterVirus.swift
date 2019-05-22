@@ -33,7 +33,8 @@ class MonsterVirus : Virus
         physics.isDynamic = false
         physics.allowsRotation = false
         physics.affectedByGravity = false
-        physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue
+        physics.categoryBitMask = CategoryBitmask.enemyVirus.rawValue
+        physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue | CategoryBitmask.enemyVirus.rawValue
         physicsBody = physics
         
         name = "monster"

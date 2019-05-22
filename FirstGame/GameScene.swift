@@ -9,7 +9,7 @@
 import SpriteKit
 
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let cam = SKCameraNode()
     
@@ -43,9 +43,9 @@ class GameScene: SKScene {
         bgPhys.isResting = true
         bgPhys.friction = 0
         bgPhys.affectedByGravity = false
+        bgPhys.categoryBitMask =  CategoryBitmask.screenBounds.rawValue
         
         sprite.physicsBody = bgPhys
-        sprite.physicsBody?.categoryBitMask =  CategoryBitmask.screenBounds.rawValue
         return sprite
     }()
     
