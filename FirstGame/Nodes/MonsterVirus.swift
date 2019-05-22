@@ -35,6 +35,8 @@ class MonsterVirus : Virus
         physics.affectedByGravity = false
         physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue
         physicsBody = physics
+        
+        name = "monster"
     }
     
 }

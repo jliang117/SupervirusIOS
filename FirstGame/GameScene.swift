@@ -51,8 +51,6 @@ class GameScene: SKScene {
     
     lazy var player: HeroVirus = {
         var hero = HeroVirus.init(radius: CGFloat(heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus")
-        hero.physicsBody?.collisionBitMask = CategoryBitmask.screenBounds.rawValue
-        hero.name = "player"
         return hero
     }()
     
