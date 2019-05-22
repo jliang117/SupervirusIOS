@@ -24,11 +24,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case background, hero, joystick
     }
     
-    lazy var playableRect : CGRect = {
-        var rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        return rect
-    }()
-    
     lazy var background: SKShapeNode = {
         let path = CGMutablePath()
         path.addArc(center: CGPoint.zero, radius: CGFloat(bgSize), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
@@ -99,17 +94,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    
-    private func drawPlayableArea(){
-        let path = CGMutablePath()
-        path.addRect(playableRect)
-        let area = SKShapeNode(path: path, centered: true)
-        area.lineWidth = 2
-        area.strokeColor = .red
-        area.position = CGPoint.zero
-        addChild(area)
-        
-    }
+
     
     private func setupPhysics(){
         physicsWorld.contactDelegate = self
