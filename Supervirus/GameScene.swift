@@ -17,7 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var positionLabel = SKLabelNode()
     
     let velocityMultiplier: CGFloat = 0.12
-    let bgSize: Int = 600
+    let bgCircleRadius: Int = 600
     let heroStartSize: Int = 20
     
     enum NodesZPosition: CGFloat {
@@ -26,7 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     lazy var background: SKShapeNode = {
         let path = CGMutablePath()
-        path.addArc(center: CGPoint.zero, radius: CGFloat(bgSize), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
+        path.addArc(center: CGPoint.zero, radius: CGFloat(bgCircleRadius), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
         
         let sprite = SKShapeNode(path: path, centered: true)
         sprite.strokeColor = .black
@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCamera()
         setupJoystick()
         setupPhysics()
-        createMonsters(numCreated:10)
+        createMonsters(numCreated:15)
         createLabels()
     }
     
@@ -187,28 +187,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func createMonsters(numCreated:Int){
         for _ in 1...numCreated{
             let randRadi = randomBetween(lower: 5, upper: Double(2 * player.radius))
-            let startPos = createRandomStartPosition(withBackgroundRadius: randRadi)
+            let startPos = createRandomStartPosition(accountingForStartRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
         }
     }
     
-    private func createRandomStartPosition(withBackgroundRadius radius:Int)->CGPoint{
-        let pointSeed = arc4random_uniform(UInt32(bgSize-radius-100))
+    private func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
         
-        let minPoint:Int = randomBetween(lower: 30, upper: 300)
+        //limit y value, this only creates a point in the (+,+) coordinate space, need to randomly
+        var pointX: Int = randomBetween(lower: 0, upper: Double(bgCircleRadius) - Double(radius+20))
+        let maxY: Double = sqrt(Double(pow(Double(bgCircleRadius), 2.0)) - Double(pow(Double(pointX), 2.0)))
+        var pointY: Int = randomBetween(lower: 0, upper: maxY - Double(radius+20))
+        
+        //adding a minimum distance
         let minDistanceThreshold: Int = 100
+        pointX = addRandomAbsoluteValueIfBelowThreshold( addee: pointX, threshold: minDistanceThreshold)
+        pointY = addRandomAbsoluteValueIfBelowThreshold( addee: pointY, threshold: minDistanceThreshold)
         
-        var pointX: Int = randomBetween(lower: -(Double(pointSeed+1)) , upper: Double(pointSeed))
-        var pointY: Int = randomBetween(lower: -(Double(pointSeed+1)) , upper: Double(pointSeed))
-        
-        if pointX < minDistanceThreshold {
-            pointX = addAbsoluteValue(numToAdd: minPoint, addee: pointX)
+        //randomly set which hemisphere
+        let quarterSphere:Int = randomBetween(lower: 1.0, upper: 4.0)
+        switch quarterSphere {
+//        case 1: northEast (+,+) leave it
+        case 1:
+            break
+        case 2: //northWest (-,+)
+            pointX = -pointX
+        case 3: //souchWest (-,-)
+            pointX = -pointX
+            pointY = -pointY
+        case 4: //southEast (+,-)
+            pointY = -pointY
+        default:
+            break
         }
-        if pointY < minDistanceThreshold{
-            pointY = addAbsoluteValue(numToAdd: minPoint, addee: pointY)
-        }
-        
 //        print("seed: \(pointSeed) radius: \(radius), point: \(CGPoint(x: pointX, y: pointY))")
         return CGPoint(x: pointX, y: pointY)
     }
@@ -217,13 +229,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return Int(Double.random(in: lower...upper))
     }
     
-    private func addAbsoluteValue(numToAdd:Int, addee:Int) -> Int{
-//        print("adding \(numToAdd) to \(addee)")
-        if addee < 0 {
-            let retVal = addee - numToAdd
-//            print("negative addee, reval is: \(retVal)")
-            return retVal
+    private func addRandomAbsoluteValueIfBelowThreshold(addee:Int, threshold:Int) -> Int{
+        let numToAdd:Int = randomBetween(lower: 30, upper: 100)
+        if addee < threshold {
+            return numToAdd + addee
         }
-        return numToAdd + addee
+        return addee
     }
 }
