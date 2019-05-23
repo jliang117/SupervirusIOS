@@ -13,6 +13,7 @@
 		664F656022949440006F5E1B /* CategoryBitmask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F655F22949440006F5E1B /* CategoryBitmask.swift */; };
 		664F656422949564006F5E1B /* MonsterVirus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F656322949564006F5E1B /* MonsterVirus.swift */; };
 		664F65682295EA3A006F5E1B /* LoseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F65672295EA3A006F5E1B /* LoseScene.swift */; };
+		664F656A22963AE8006F5E1B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F656922963AE8006F5E1B /* Constants.swift */; };
 		66A81F38228B5152005490CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A81F37228B5152005490CA /* AppDelegate.swift */; };
 		66A81F3E228B5152005490CA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A81F3D228B5152005490CA /* GameScene.swift */; };
 		66A81F40228B5152005490CA /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A81F3F228B5152005490CA /* GameViewController.swift */; };
@@ -45,6 +46,7 @@
 		664F655F22949440006F5E1B /* CategoryBitmask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryBitmask.swift; sourceTree = "<group>"; };
 		664F656322949564006F5E1B /* MonsterVirus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterVirus.swift; sourceTree = "<group>"; };
 		664F65672295EA3A006F5E1B /* LoseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScene.swift; sourceTree = "<group>"; };
+		664F656922963AE8006F5E1B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		66A81F34228B5152005490CA /* Supervirus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Supervirus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66A81F37228B5152005490CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66A81F3D228B5152005490CA /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				664F655722924E21006F5E1B /* Extensions.swift */,
 				664F655922924FF4006F5E1B /* AnalogJoystick.swift */,
 				664F65672295EA3A006F5E1B /* LoseScene.swift */,
+				664F656922963AE8006F5E1B /* Constants.swift */,
 			);
 			path = Supervirus;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66A81F3E228B5152005490CA /* GameScene.swift in Sources */,
+				664F656A22963AE8006F5E1B /* Constants.swift in Sources */,
 				664F656022949440006F5E1B /* CategoryBitmask.swift in Sources */,
 				664F655E2294940D006F5E1B /* HeroVirus.swift in Sources */,
 				664F655A22924FF4006F5E1B /* AnalogJoystick.swift in Sources */,

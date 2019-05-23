@@ -19,6 +19,8 @@ class MonsterVirus : Virus
 
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.allowsRotation = false
+        physics.mass = CGFloat(self.score)
+        physics.isResting = true
         physics.affectedByGravity = false
         physicsBody = physics
         
@@ -37,8 +39,7 @@ class MonsterVirus : Virus
     func startMoving(){
         let duration = self.random(min: 0, max: 20.0)
         Timer.scheduledTimer(withTimeInterval: TimeInterval(duration), repeats: true) { timer in
-            let scene = self.scene as! GameScene
-            let pointInScene = scene.createRandomStartPosition(accountingForStartRadius: Int(self.radius))
+            let pointInScene = GameScene.createRandomStartPosition(accountingForStartRadius: Int(self.radius))
             self.run(SKAction.move(to: pointInScene, duration: 5.0))
         }
     }

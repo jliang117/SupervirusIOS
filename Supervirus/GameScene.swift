@@ -16,9 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel = SKLabelNode()
     var positionLabel = SKLabelNode()
     
-    let velocityMultiplier: CGFloat = 0.12
-    let bgCircleRadius: Int = 600
-    let heroStartSize: Int = 20
+   
     
     enum NodesZPosition: CGFloat {
         case background, hero, joystick
@@ -26,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     lazy var background: SKShapeNode = {
         let path = CGMutablePath()
-        path.addArc(center: CGPoint.zero, radius: CGFloat(bgCircleRadius), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
+        path.addArc(center: CGPoint.zero, radius: CGFloat(Constants.bgCircleRadius), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
         
         let sprite = SKShapeNode(path: path, centered: true)
         sprite.strokeColor = .black
@@ -46,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }()
     
     lazy var player: HeroVirus = {
-        var hero = HeroVirus.init(radius: CGFloat(heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus",score: 0)
+        var hero = HeroVirus.init(radius: CGFloat(Constants.heroStartSize), startPos: CGPoint.zero, imageNamed: "heroVirus",score: 0)
         return hero
     }()
     
@@ -186,8 +184,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func setupJoystick(){
         analogJoystick.trackingHandler = { [unowned self] data in
-            self.player.position = CGPoint(x: self.player.position.x + (data.velocity.x * self.velocityMultiplier),
-                                         y: self.player.position.y + (data.velocity.y * self.velocityMultiplier))
+            self.player.position = CGPoint(x: self.player.position.x + (data.velocity.x * Constants.velocityMultiplier),
+                                         y: self.player.position.y + (data.velocity.y * Constants.velocityMultiplier))
         }
     }
     
@@ -197,19 +195,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func createMonsters(numCreated:Int){
         for _ in 1...numCreated{
-            let randRadi = randomBetween(lower: 5, upper: Double(4 * player.radius))
-            let startPos = createRandomStartPosition(accountingForStartRadius: randRadi)
+            let randRadi = GameScene.randomBetween(lower: 5, upper: Double(Constants.monsterSpawnRatio * player.radius))
+            let startPos = GameScene.createRandomStartPosition(accountingForStartRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
-            print("Creating more disease")
         }
     }
     
-    func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
+    static func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
         
         //limit y value, this only creates a point in the (+,+) coordinate space, need to randomly
-        var pointX: Int = randomBetween(lower: 0, upper: Double(bgCircleRadius) - Double(radius+20))
-        let maxY: Double = sqrt(Double(pow(Double(bgCircleRadius), 2.0)) - Double(pow(Double(pointX), 2.0)))
+        var pointX: Int = randomBetween(lower: 0, upper: Double(Constants.bgCircleRadius) - Double(radius+20))
+        let maxY: Double = sqrt(Double(pow(Double(Constants.bgCircleRadius), 2.0)) - Double(pow(Double(pointX), 2.0)))
         var pointY: Int = randomBetween(lower: 0, upper: maxY - Double(radius+20))
         
         //adding a minimum distance
@@ -237,11 +234,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return CGPoint(x: pointX, y: pointY)
     }
     
-    private func randomBetween(lower:Double, upper:Double)->Int{
+    static func randomBetween(lower:Double, upper:Double)->Int{
         return Int(Double.random(in: lower...upper))
     }
     
-    private func addRandomAbsoluteValueIfBelowThreshold(addee:Int, threshold:Int) -> Int{
+    static func addRandomAbsoluteValueIfBelowThreshold(addee:Int, threshold:Int) -> Int{
         let numToAdd:Int = randomBetween(lower: 30, upper: 100)
         if addee < threshold {
             return numToAdd + addee
