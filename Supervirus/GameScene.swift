@@ -39,6 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bgPhys.friction = 0
         bgPhys.affectedByGravity = false
         bgPhys.categoryBitMask =  CategoryBitmask.screenBounds.rawValue
+        bgPhys.collisionBitMask = CategoryBitmask.enemyVirus.rawValue | CategoryBitmask.heroVirus.rawValue
         
         sprite.physicsBody = bgPhys
         return sprite
