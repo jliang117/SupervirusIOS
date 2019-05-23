@@ -66,6 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPhysics()
         createMonsters(numCreated:15)
         createLabels()
+        createMonsterTimer()
     }
     
     //    Mark: continuous game logic
@@ -86,15 +87,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if aNode.name == "player"{
             collisionBetween(hero: aNode as! HeroVirus, monster: bNode)
         }
-        else{
+        if bNode.name == "player"{
             collisionBetween(hero: bNode as! HeroVirus, monster: aNode)
+        }
+        else{
+            
         }
     }
     
     
     private func setupPhysics(){
         physicsWorld.contactDelegate = self
-        
     }
     
     private func collisionBetween(hero: HeroVirus, monster: Virus){
@@ -116,6 +119,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.view?.presentScene(scene, transition:reveal)
             }
             ]))
+    }
+    
+    private func createMonsterTimer(){
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(5.0), repeats: true)
+        { timer in
+            self.createMonsters(numCreated: 1)
+        }
     }
     
     private func eatMonsterAndRecreateHero(hero: HeroVirus, monster: Virus){
@@ -187,14 +197,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func createMonsters(numCreated:Int){
         for _ in 1...numCreated{
-            let randRadi = randomBetween(lower: 5, upper: Double(2 * player.radius))
+            let randRadi = randomBetween(lower: 5, upper: Double(4 * player.radius))
             let startPos = createRandomStartPosition(accountingForStartRadius: randRadi)
             let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
             addChild(monster)
+            print("Creating more disease")
         }
     }
     
-    private func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
+    func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
         
         //limit y value, this only creates a point in the (+,+) coordinate space, need to randomly
         var pointX: Int = randomBetween(lower: 0, upper: Double(bgCircleRadius) - Double(radius+20))

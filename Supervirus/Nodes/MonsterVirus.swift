@@ -18,10 +18,8 @@ class MonsterVirus : Virus
         super.init(radius: radius, startPos: startPos, imageNamed: imageNamed)
 
         let physics = SKPhysicsBody(circleOfRadius: radius)
-        physics.isDynamic = false
         physics.allowsRotation = false
         physics.affectedByGravity = false
-        physics.collisionBitMask = CategoryBitmask.heroVirus.rawValue | CategoryBitmask.screenBounds.rawValue | CategoryBitmask.enemyVirus.rawValue
         physicsBody = physics
         
         name = "monster"
@@ -38,10 +36,10 @@ class MonsterVirus : Virus
     
     func startMoving(){
         let duration = self.random(min: 0, max: 20.0)
-        let timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(duration), repeats: true) { timer in
-            let randX = self.random(min: -CGFloat(600), max: CGFloat(600))
-            let randY = self.random(min: -CGFloat(600), max: CGFloat(600))
-            self.run(SKAction.move(to: CGPoint(x:randX, y:randY), duration: 5.0))
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(duration), repeats: true) { timer in
+            let scene = self.scene as! GameScene
+            let pointInScene = scene.createRandomStartPosition(accountingForStartRadius: Int(self.radius))
+            self.run(SKAction.move(to: pointInScene, duration: 5.0))
         }
     }
     

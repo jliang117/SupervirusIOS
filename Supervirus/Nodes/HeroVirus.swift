@@ -21,7 +21,6 @@ class HeroVirus : Virus
         self.score = score
         let physics = SKPhysicsBody(circleOfRadius: radius)
         physics.usesPreciseCollisionDetection = true
-        physics.collisionBitMask = CategoryBitmask.screenBounds.rawValue | CategoryBitmask.enemyVirus.rawValue
         physics.contactTestBitMask = CategoryBitmask.enemyVirus.rawValue
         physics.allowsRotation = false
         physics.affectedByGravity = false
