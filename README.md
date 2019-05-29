@@ -15,4 +15,8 @@ Clone, open the .xcodeproj, run
 
 4. high scores/menu screen
 
+## Demo
+
+![demo](demo.gif)
+
 
