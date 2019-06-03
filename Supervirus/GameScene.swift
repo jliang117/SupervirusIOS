@@ -11,17 +11,13 @@ import SpriteKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var running: Bool = true
     let cam = SKCameraNode()
-    
     var scoreLabel = SKLabelNode()
     var positionLabel = SKLabelNode()
     
    
-    
-    enum NodesZPosition: CGFloat {
-        case background, hero, joystick
-    }
-    
+
     lazy var background: SKShapeNode = {
         let path = CGMutablePath()
         path.addArc(center: CGPoint.zero, radius: CGFloat(Constants.bgCircleRadius), startAngle: 0, endAngle: 2 * CGFloat(Double.pi), clockwise: true)
@@ -51,8 +47,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     lazy var analogJoystick: AnalogJoystick = {
         let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: UIImage(named: "jSubstrate"), stick: UIImage(named: "jStick")))
         js.position = CGPoint(x: -self.frame.midX, y: -self.frame.midY - 350)
-        js.zPosition = NodesZPosition.joystick.rawValue
         return js
+    }()
+    
+    lazy var monsterTimer: Timer = {
+        return Timer.scheduledTimer(withTimeInterval: TimeInterval(Constants.createMonsterInterval), repeats: true)
+        { timer in
+            self.createMonsters(numCreated: 1)
+        }
     }()
 
     
@@ -62,15 +64,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCamera()
         setupJoystick()
         setupPhysics()
-        createMonsters(numCreated:15)
+        createMonsters(numCreated:Constants.startingMonstersNum)
         createLabels()
-        createMonsterTimer()
+        monsterTimer.fire()
+//        createMonsterTimer()
     }
     
     //    Mark: continuous game logic
     override func update(_ currentTime: TimeInterval) {
-        cam.position = player.position
-        updateScoreLabel()
+        if running{
+            cam.position = player.position
+            updateScoreLabel()
+        }
     }
     
     //    Mark: virus collison logic
@@ -93,7 +98,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
     private func setupPhysics(){
         physicsWorld.contactDelegate = self
     }
@@ -109,6 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameOver(){
+        self.running = false
+        monsterTimer.invalidate()
         stopJoystickTracking()
         run(SKAction.sequence([
             SKAction.run {
@@ -119,15 +125,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ]))
     }
     
-    private func createMonsterTimer(){
-        Timer.scheduledTimer(withTimeInterval: TimeInterval(5.0), repeats: true)
-        { timer in
-            self.createMonsters(numCreated: 1)
-        }
-    }
     
     private func eatMonsterAndRecreateHero(hero: HeroVirus, monster: Virus){
-        hero.radius = hero.radius * 1.05
+        hero.radius = hero.radius * Constants.heroGrowRatio
         hero.score = hero.score + monster.score
         destroy(virus: monster)
         destroy(virus: hero)
@@ -197,11 +197,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for _ in 1...numCreated{
             let randRadi = GameScene.randomBetween(lower: 5, upper: Double(Constants.monsterSpawnRatio * player.radius))
             let startPos = GameScene.createRandomStartPosition(accountingForStartRadius: randRadi)
-            let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
-            addChild(monster)
+            print("attempting to add monster at pos: \(startPos))")
+            if !isCollidingWithPlayer(monsterPoint: startPos, monsterRadius: CGFloat(randRadi)){
+                let monster = MonsterVirus.init(radius: CGFloat(randRadi), startPos: startPos, imageNamed: "badVirus")
+                addChild(monster)
+            }
         }
     }
     
+    private func isCollidingWithPlayer(monsterPoint point:CGPoint, monsterRadius rad:CGFloat)->Bool{
+        let maxAllowedRadius = player.radius + rad
+        let distanceBetween: CGFloat = CGFloat(hypotf(Float(point.x - player.position.x), Float(point.y - player.position.y)))
+        return distanceBetween < maxAllowedRadius
+    }
+        
+        
     static func createRandomStartPosition(accountingForStartRadius radius:Int)->CGPoint{
         
         //limit y value, this only creates a point in the (+,+) coordinate space, need to randomly
