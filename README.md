@@ -7,7 +7,7 @@ Clone, open the .xcodeproj, run
 
 ## TODO
 
-1. fix monster spawning so no more phantom instagibs
+~~1. fix monster spawning so no more phantom instagibs~~
 
 2. settings to adjust things - difficulty (change monster speed, background size, eat monster gain, etc.)
 
