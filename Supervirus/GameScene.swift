@@ -46,7 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     lazy var analogJoystick: AnalogJoystick = {
         let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: UIImage(named: "jSubstrate"), stick: UIImage(named: "jStick")))
-        js.position = CGPoint(x: -self.frame.midX, y: -self.frame.midY - 350)
+        js.position = CGPoint(x: -self.frame.midX, y: (-self.frame.height * 0.5) + js.diameter)
+        print(js.position)
         return js
     }()
     
