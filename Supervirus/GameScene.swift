@@ -160,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         positionLabel.fontName = "Chalkduster"
         positionLabel.fontSize = 32
         
-        scoreLabel.position = CGPoint(x: -(frame.size.width * 0.30), y: -(frame.size.height * 0.40))
+        scoreLabel.position = CGPoint(x: frame.midX, y: (frame.size.height * 0.45))
         scoreLabel.fontColor = .black
         scoreLabel.fontName = "Chalkduster"
         scoreLabel.fontSize = 20

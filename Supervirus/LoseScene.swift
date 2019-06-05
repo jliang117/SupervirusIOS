@@ -22,17 +22,24 @@ class LoseScene: SKScene{
         
         let label = SKLabelNode(fontNamed: "Chalkduster")
         label.text = "you fakn looz"
-        label.fontSize = 40
+        label.fontSize = 32
         label.fontColor = .red
         label.position = CGPoint(x: 0, y: 40)
         addChild(label)
         
         let scoreLabel = SKLabelNode(fontNamed: "Chalkduster")
-        scoreLabel.text = "your score was \(score)...tap to reload"
+        scoreLabel.text = "your score was \(score)"
         scoreLabel.fontSize = 20
         scoreLabel.fontColor = .red
-        scoreLabel.position = CGPoint(x: 0, y: -40)
+        scoreLabel.position = CGPoint(x: 0, y: -15)
         addChild(scoreLabel)
+        
+        let reloadLabel = SKLabelNode(fontNamed: "Chalkduster")
+        reloadLabel.text = "tap to reload"
+        reloadLabel.fontSize = 20
+        reloadLabel.fontColor = .red
+        reloadLabel.position = CGPoint(x: 0, y: -40)
+        addChild(reloadLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
