@@ -15,6 +15,8 @@ Clone, open the .xcodeproj, run
 
 4. high scores/menu screen
 
+5. adjust monster spawn rate to be inverse of nodecount
+
 ## Demo (it's laggy on simulator)
 
 
